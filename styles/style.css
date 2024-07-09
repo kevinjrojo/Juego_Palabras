@@ -1,0 +1,102 @@
+body {
+  align-content: center;
+  background-image: url("../img/bg-guess-the-word.png");
+  height: 78.5ch;
+  background-size: cover;
+  background-position: center;
+}
+.container {
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 65vh;
+  background-color: #1b1d29;
+  margin: auto;
+}
+.palabra {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border-radius: 5px;
+  margin-bottom: 2%;
+  word-spacing: 2vh;
+  background-color: #4a5567;
+  color: #97a3b6;
+  font-size: 45px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 5px;
+  box-shadow: 1px 5px #030616;
+}
+.ayudas {
+  display: flex;
+  justify-content: space-evenly;
+}
+.cantidad {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #97a3b6;
+}
+.pistas {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #97a3b6;
+}
+.respuestas {
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+.letra {
+  margin: 8px;
+  text-align: center;
+  color: #f2f5f9;
+  background-color: #030616;
+  border: 2px #97a3b6 solid;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.btn {
+  width: 100px;
+  border: none;
+  background-color: #c951e7;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 8px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding: 10px;
+  color: #f2f5f9;
+  box-shadow: 1px 7px #672171;
+}
+
+@media (min-width: 300px) and (max-width: 900px) {
+  body {
+    align-content: center;
+    background-size: auto;
+    background-position-x: 10%;
+  }
+  .container {
+    margin: auto;
+    width: 50vh;
+  }
+  .palabra {
+    font-size: 40px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 0%;
+  }
+  .respuestas {
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
+  .letra {
+    margin: 0px;
+  }
+  .btn {
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+}
