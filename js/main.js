@@ -8,6 +8,7 @@ function obtenerPalabras() {
   palabrasDesordenadas.forEach((element) => {
     let clave = Object.values(element);
     let indiceAleatorio = Math.floor(Math.random() * clave.length);
+
     let claveAleatorio = clave[indiceAleatorio];
     cantidadinputs = claveAleatorio;
   });
@@ -29,9 +30,8 @@ function mostrarPalabra() {
   }
   crearInputs();
 }
-mostrarPalabra();
 
-let respuestaDeUsuario = [];
+mostrarPalabra();
 
 function obtenerRespuestas() {
   let numerosInputs = document.querySelectorAll('input[type="text"]');
@@ -42,25 +42,46 @@ function obtenerRespuestas() {
     //  aca hay misma cantidad de input y index  console.log(input)
 
     input.addEventListener("keyup", function (event) {
+      if (event.key === "Backspace") {
+        numerosInputs[index - 1].focus();
+      }
       if (event.key.length === 1 && index < numerosInputs.length - 1) {
         numerosInputs[index + 1].focus();
       }
     });
   });
-  evento.addEventListener("keyup", function (event) {
-    for (let i = 0; i < numerosInputs.length; i++) {
-      const element = numerosInputs[i];
-      let respuesta = element.value;
-      respuestaDeUsuario.push(respuesta);
+  evento.addEventListener("keyup", function () {
+    let respuestaDeUsuario = [];
+    let respuestaCorrecta = [];
+
+    function palabraUsuario() {
+      for (let i = 0; i < numerosInputs.length; i++) {
+        const element = numerosInputs[i];
+        let respuesta = element.value;
+        respuestaDeUsuario.push(respuesta);
+      }
     }
+    palabraUsuario();
+    function palabraCorrecta() {
+      for (let i = 0; i < palabrasOrdenadas.length; i++) {
+        const palabra = palabrasOrdenadas[i];
+        respuestaCorrecta.push(palabra);
+      }
+    }
+    palabraCorrecta();
+    function compararPalabra() {
+      let result = respuestaDeUsuario.join("");
+      if (respuestaCorrecta.includes(result)) {
+        alert(`La palabra ${result} es correcta`);
+      } else {
+        alert(`La palabra ${result} es incorrecto`);
+      }
+    }
+    compararPalabra();
   });
 }
 
 obtenerRespuestas();
-
-setTimeout(() => {
-  console.log(respuestaDeUsuario);
-}, 10000);
 
 /*
 
