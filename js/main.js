@@ -2,7 +2,10 @@ import { palabrasOrdenadas, palabrasDesordenadas } from "./palabras.js";
 
 let palabras = document.querySelector(".palabra");
 let inputs = document.querySelector(".respuestas");
+let vidas = document.querySelectorAll(".vidas");
 let cantidadinputs;
+
+console.log(vidas);
 
 function obtenerPalabras() {
   palabrasDesordenadas.forEach((element) => {
@@ -50,7 +53,7 @@ function obtenerRespuestas() {
       }
     });
   });
-  evento.addEventListener("keyup", function () {
+  evento.addEventListener("keypress", function () {
     let respuestaDeUsuario = [];
     let respuestaCorrecta = [];
 
@@ -69,12 +72,23 @@ function obtenerRespuestas() {
       }
     }
     palabraCorrecta();
+
     function compararPalabra() {
+      let lugares = inputs.querySelectorAll(".letra");
+
+      console.log(lugares);
       let result = respuestaDeUsuario.join("");
-      if (respuestaCorrecta.includes(result)) {
-        alert(`La palabra ${result} es correcta`);
-      } else {
+      let palabrasInconrrectas = [];
+      if (!respuestaCorrecta.includes(result)) {
         alert(`La palabra ${result} es incorrecto`);
+        lugares.value = "";
+        palabrasInconrrectas.push(result);
+        console.log(palabrasInconrrectas);
+        vidas.forEach((item) => {
+          item.classList.add("punto");
+        });
+      } else {
+        alert(`La palabra ${result} es correcta`);
       }
     }
     compararPalabra();
