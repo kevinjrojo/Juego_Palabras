@@ -2,10 +2,25 @@ import { palabrasOrdenadas, palabrasDesordenadas } from "./palabras.js";
 
 let palabras = document.querySelector(".palabra");
 let inputs = document.querySelector(".respuestas");
+let pistas = document.querySelector(".pistas");
+let reiniciar = document.querySelector(".reset");
 let vidas = document.querySelectorAll(".vidas");
+let save = 0;
 let cantidadinputs;
 
-console.log(vidas);
+function oportunidades() {
+  console.log(vidas);
+}
+
+oportunidades;
+
+function reiniciarTodo() {
+  reiniciar.addEventListener("click", () => {
+    location.reload(true);
+  });
+}
+
+reiniciarTodo();
 
 function obtenerPalabras() {
   palabrasDesordenadas.forEach((element) => {
@@ -53,7 +68,7 @@ function obtenerRespuestas() {
       }
     });
   });
-  evento.addEventListener("keypress", function () {
+  evento.addEventListener("keyup", function () {
     let respuestaDeUsuario = [];
     let respuestaCorrecta = [];
 
@@ -76,16 +91,24 @@ function obtenerRespuestas() {
     function compararPalabra() {
       let lugares = inputs.querySelectorAll(".letra");
 
-      console.log(lugares);
       let result = respuestaDeUsuario.join("");
       let palabrasInconrrectas = [];
       if (!respuestaCorrecta.includes(result)) {
-        alert(`La palabra ${result} es incorrecto`);
-        lugares.value = "";
         palabrasInconrrectas.push(result);
-        console.log(palabrasInconrrectas);
-        vidas.forEach((item) => {
-          item.classList.add("punto");
+        let obtentenerError = palabrasInconrrectas[0];
+        let separador = obtentenerError.split("");
+        pistas.innerText = `Mistakes: ${separador}`;
+        lugares.forEach((input) => {
+          input.value = "";
+        });
+        lugares[0].focus();
+        Swal.fire({
+          icon: "error",
+          title: `La palabra es incorrecta`,
+          text: "Vuelve a intentarlo!",
+          background: "#1b1d29",
+          color: "#F2F5F9",
+          confirmButtonColor: "#c951e7",
         });
       } else {
         alert(`La palabra ${result} es correcta`);
