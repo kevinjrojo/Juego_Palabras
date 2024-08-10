@@ -59,6 +59,17 @@ function obtenerRespuestas() {
   numerosInputs.forEach((input, index) => {
     //  aca hay misma cantidad de input y index  console.log(input)
 
+    input.addEventListener("touchstart", () => {
+      input.addEventListener("keyup", function (event) {
+        if (event.key === "Backspace") {
+          numerosInputs[index - 1].focus();
+        }
+        if (event.key.length === 1 && index < numerosInputs.length - 1) {
+          numerosInputs[index + 1].focus();
+        }
+      });
+    });
+
     input.addEventListener("keyup", function (event) {
       if (event.key === "Backspace") {
         numerosInputs[index - 1].focus();
@@ -111,7 +122,14 @@ function obtenerRespuestas() {
           confirmButtonColor: "#c951e7",
         });
       } else {
-        alert(`La palabra ${result} es correcta`);
+        Swal.fire({
+          icon: "success",
+          title: "RESPUESTA CORRECTA! 🎉",
+          text: "Felicidades haz ganado 🏆",
+          background: "#1b1d29",
+          color: "#F2F5F9",
+          confirmButtonColor: "#c951e7",
+        });
       }
     }
     compararPalabra();
