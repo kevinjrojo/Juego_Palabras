@@ -59,7 +59,7 @@ function obtenerRespuestas() {
   numerosInputs.forEach((input, index) => {
     //  aca hay misma cantidad de input y index  console.log(input)
 
-    input.addEventListener("keyup", function (event) {
+    input.addEventListener("input", function (event) {
       if (event.key === "Backspace") {
         numerosInputs[index - 1].focus();
       }
