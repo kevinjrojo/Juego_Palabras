@@ -111,7 +111,14 @@ function obtenerRespuestas() {
           confirmButtonColor: "#c951e7",
         });
       } else {
-        alert(`La palabra ${result} es correcta`);
+    Swal.fire({
+          icon: "succes",
+          title: `FELICIDES HAZ GANADO! 😎`,
+          text: "Vuelve a intentarlo!",
+          background: "#1b1d29",
+          color: "#F2F5F9",
+          confirmButtonColor: "#c951e7",
+        });
       }
     }
     compararPalabra();
