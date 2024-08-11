@@ -1,9 +1,10 @@
 body {
-  align-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 97vh;
   background-image: url("../img/bg-guess-the-word.png");
-  height: 78.5ch;
   background-size: cover;
-  background-position: center;
 }
 .container {
   border-radius: 10px;
@@ -11,7 +12,6 @@ body {
   text-align: center;
   width: 65vh;
   background-color: #1b1d29;
-  margin: auto;
 }
 .palabra {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -82,7 +82,7 @@ body {
   margin-bottom: 30px;
   padding: 10px;
   color: #f2f5f9;
-  box-shadow: 1px 7px #672171;
+  box-shadow: 1px 5px #672171;
 }
 .random {
   width: 100px;
@@ -96,7 +96,7 @@ body {
   margin-bottom: 30px;
   padding: 10px;
   color: #f2f5f9;
-  box-shadow: 1px 7px #672171;
+  box-shadow: 1px 5px #672171;
 }
 
 @media (min-width: 300px) and (max-width: 900px) {
