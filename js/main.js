@@ -5,22 +5,20 @@ let inputs = document.querySelector(".respuestas");
 let pistas = document.querySelector(".pistas");
 let reiniciar = document.querySelector(".reset");
 let vidas = document.querySelectorAll(".vidas");
-let save = 0;
+let posibilidades = document.querySelector(".cantidad");
+let contador = 0;
 let cantidadinputs;
 
-function oportunidades() {
-  console.log(vidas);
-}
-
-oportunidades;
+reiniciarTodo();
+obtenerPalabras();
+mostrarPalabra();
+obtenerRespuestas();
 
 function reiniciarTodo() {
   reiniciar.addEventListener("click", () => {
     location.reload(true);
   });
 }
-
-reiniciarTodo();
 
 function obtenerPalabras() {
   palabrasDesordenadas.forEach((element) => {
@@ -31,8 +29,6 @@ function obtenerPalabras() {
     cantidadinputs = claveAleatorio;
   });
 }
-
-obtenerPalabras();
 
 function mostrarPalabra() {
   palabras.innerText = cantidadinputs;
@@ -49,8 +45,6 @@ function mostrarPalabra() {
   crearInputs();
 }
 
-mostrarPalabra();
-
 function obtenerRespuestas() {
   let numerosInputs = document.querySelectorAll('input[type="text"]');
   // de aca obtiene los input y index el forEach
@@ -58,18 +52,6 @@ function obtenerRespuestas() {
   let evento = numerosInputs[numerosInputs.length - 1];
   numerosInputs.forEach((input, index) => {
     //  aca hay misma cantidad de input y index  console.log(input)
-
-    input.addEventListener("touchstart", () => {
-      input.addEventListener("keyup", function (event) {
-        if (event.key === "Backspace") {
-          numerosInputs[index - 1].focus();
-        }
-        if (event.key.length === 1 && index < numerosInputs.length - 1) {
-          numerosInputs[index + 1].focus();
-        }
-      });
-    });
-
     input.addEventListener("keyup", function (event) {
       if (event.key === "Backspace") {
         numerosInputs[index - 1].focus();
@@ -101,17 +83,27 @@ function obtenerRespuestas() {
 
     function compararPalabra() {
       let lugares = inputs.querySelectorAll(".letra");
-
       let result = respuestaDeUsuario.join("");
       let palabrasInconrrectas = [];
+
       if (!respuestaCorrecta.includes(result)) {
         palabrasInconrrectas.push(result);
         let obtentenerError = palabrasInconrrectas[0];
         let separador = obtentenerError.split("");
+
         pistas.innerText = `Mistakes: ${separador}`;
+
         lugares.forEach((input) => {
           input.value = "";
         });
+
+        vidas.forEach((element, indice) => {
+          if (indice === contador) {
+            element.style.color = "blue";
+          }
+        });
+        contador++;
+        posibilidades.innerText = `Tries(${contador}/5):`;
         lugares[0].focus();
         Swal.fire({
           icon: "error",
@@ -131,12 +123,24 @@ function obtenerRespuestas() {
           confirmButtonColor: "#c951e7",
         });
       }
+      if (contador === 5) {
+        Swal.fire({
+          icon: "error",
+          title: `GAME OVER`,
+          text: "Vuelve a intentarlo!",
+          background: "#1b1d29",
+          color: "#F2F5F9",
+          confirmButtonColor: "#c951e7",
+        });
+        setTimeout(() => {
+          location.reload(true);
+          as;
+        }, 4000);
+      }
     }
     compararPalabra();
   });
 }
-
-obtenerRespuestas();
 
 /*
 
