@@ -13,7 +13,7 @@ reiniciarTodo();
 obtenerPalabras();
 mostrarPalabra();
 obtenerRespuestas();
-evetosMovil();
+eventosMovil();
 
 function reiniciarTodo() {
   reiniciar.addEventListener("click", () => {
@@ -62,7 +62,7 @@ function obtenerRespuestas() {
       }
     });
   });
-  evento.addEventListener("", function () {
+  evento.addEventListener("keyup", function () {
     let respuestaDeUsuario = [];
     let respuestaCorrecta = [];
 
@@ -143,19 +143,25 @@ function obtenerRespuestas() {
   });
 }
 
-function evetosMovil() {
+function eventosMovil() {
   let numerosInputs = document.querySelectorAll('input[type="text"]');
-  // de aca obtiene los input y index el forEach
+
+  // Enfoca el primer input inicialmente
   numerosInputs[0].focus();
-  let evento = numerosInputs[numerosInputs.length - 1];
+
   numerosInputs.forEach((input, index) => {
-    //  aca hay misma cantidad de input y index  console.log(input)
-    input.addEventListener("touchend", function (event) {
-      if (event.key === "Delete") {
-        numerosInputs[index - 1].focus();
-      }
-      if (event.key.length === 1 && index < numerosInputs.length - 1) {
+    // Escucha los eventos táctiles y de teclado
+    input.addEventListener("input", function (event) {
+      // Si se ingresa un carácter y no es el último input, mueve el foco al siguiente
+      if (input.value.length === 1 && index < numerosInputs.length - 1) {
         numerosInputs[index + 1].focus();
+      }
+    });
+
+    input.addEventListener("touchend", function (event) {
+      // Si el input está vacío y no es el primero, mueve el foco al anterior
+      if (input.value.length === 0 && index > 0) {
+        numerosInputs[index - 1].focus();
       }
     });
   });
