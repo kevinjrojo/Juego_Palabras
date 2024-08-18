@@ -100,11 +100,6 @@ body {
 }
 
 @media (min-width: 300px) and (max-width: 900px) {
-  body {
-    align-content: center;
-    background-size: auto;
-    background-position-x: 10%;
-  }
   .container {
     margin: auto;
     width: 90%;
@@ -113,11 +108,13 @@ body {
     font-size: 40px;
     margin-left: 5%;
     margin-right: 5%;
-    margin-bottom: 0%;
   }
   .respuestas {
     margin-top: 20px;
     margin-bottom: 0px;
+  }
+  .buttons {
+    display: flex;
   }
   .letra {
     margin: 3px;

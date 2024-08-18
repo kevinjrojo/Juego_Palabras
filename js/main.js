@@ -61,7 +61,7 @@ function obtenerRespuestas() {
       }
     });
   });
-  evento.addEventListener("keyup", function () {
+  evento.addEventListener("", function () {
     let respuestaDeUsuario = [];
     let respuestaCorrecta = [];
 
@@ -99,7 +99,7 @@ function obtenerRespuestas() {
 
         vidas.forEach((element, indice) => {
           if (indice === contador) {
-            element.style.color = "blue";
+            element.style.color = "#7429C6";
           }
         });
         contador++;
@@ -142,43 +142,20 @@ function obtenerRespuestas() {
   });
 }
 
-/*
-
-  inp.forEach((input, index) => {
-    //  aca hay misma cantidad de input y index
-    input.addEventListener("keyup", function (event) {
-      if (event.key.length === 1 && index < inp.length - 1) {
-        // se cumple porque es -1
-        console.log(event);
-        inp[index + 1].focus();
-        respuestaCorrecta.push({
-          key: event.key,
-        });
+function evetosMovil() {
+  let numerosInputs = document.querySelectorAll('input[type="text"]');
+  // de aca obtiene los input y index el forEach
+  numerosInputs[0].focus();
+  let evento = numerosInputs[numerosInputs.length - 1];
+  numerosInputs.forEach((input, index) => {
+    //  aca hay misma cantidad de input y index  console.log(input)
+    input.addEventListener("touchend", function (event) {
+      if (event.key === "Delete") {
+        numerosInputs[index - 1].focus();
+      }
+      if (event.key.length === 1 && index < numerosInputs.length - 1) {
+        numerosInputs[index + 1].focus();
       }
     });
   });
 }
-
-let respuestaCorrecta = [];
-
-setTimeout(() => {
-  for (let i = 0; i < respuestaCorrecta.length; i++) {
-    const element = respuestaCorrecta[i];
-    console.log(element);
-  }
-}, 10000);
-
-/*for (let i = 0; i < palabrasOrdenadas.length; i++) {
-  let palabras = palabrasOrdenadas[i];
-
-  let aletorio = Math.random(palabras);
-  let palabrasAletorias = palabras[aletorio];
-
-  console.log(palabrasAletorias);
-}
-//console.log(palabras[0]);
-let palabras = document.querySelector(".palabra");
-
-*/
-
-//console.log(palabras[i].ordenado + palabras[i].desordenado);
