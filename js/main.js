@@ -13,6 +13,7 @@ reiniciarTodo();
 obtenerPalabras();
 mostrarPalabra();
 obtenerRespuestas();
+evetosMovil();
 
 function reiniciarTodo() {
   reiniciar.addEventListener("click", () => {
