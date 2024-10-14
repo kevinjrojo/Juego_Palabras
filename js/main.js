@@ -4,20 +4,64 @@ let palabras = document.querySelector(".palabra");
 let inputs = document.querySelector(".respuestas");
 let pistas = document.querySelector(".pistas");
 let reiniciar = document.querySelector(".reset");
+let random = document.querySelector(".random");
 let vidas = document.querySelectorAll(".vidas");
 let posibilidades = document.querySelector(".cantidad");
+let avisos = document.querySelector(".buttons");
 let contador = 0;
 let cantidadinputs;
 
 reiniciarTodo();
+palabraRandom();
 obtenerPalabras();
-mostrarPalabra();
+crearInputs();
 obtenerRespuestas();
-eventosMovil();
+
+function gameover() {
+  let errorPalabra = document.createElement("p");
+  errorPalabra.innerText = "Palabra Incorrecta ❌,Vuelve a intentarlo!";
+  errorPalabra.classList.add("msj");
+  avisos.appendChild(errorPalabra);
+}
+function winner() {
+  let ganador = document.createElement("p");
+  ganador.innerText = "🎉Haz Ganado ¡Felicidades!🎉 ";
+  ganador.classList.add("msj");
+  avisos.appendChild(ganador);
+
+  setTimeout(() => {
+    location.reload(true);
+    as;
+  }, 4000);
+}
+function youLost() {
+  let perder = document.createElement("p");
+  perder.innerText = "☠️Haz perdido☠️";
+  perder.classList.add("msj");
+  avisos.appendChild(perder);
+
+  setTimeout(() => {
+    location.reload(true);
+    as;
+  }, 4000);
+}
 
 function reiniciarTodo() {
   reiniciar.addEventListener("click", () => {
     location.reload(true);
+  });
+}
+
+function palabraRandom() {
+  random.addEventListener("click", () => {
+    palabras.innerHTML = "";
+
+    palabrasDesordenadas.forEach((element) => {
+      let clave = Object.values(element);
+      let indiceAleatorio = Math.floor(Math.random() * clave.length);
+      let claveAleatorio = clave[indiceAleatorio];
+      palabras.innerText = claveAleatorio;
+    });
   });
 }
 
@@ -31,38 +75,38 @@ function obtenerPalabras() {
   });
 }
 
-function mostrarPalabra() {
+function crearInputs() {
   palabras.innerText = cantidadinputs;
-  function crearInputs() {
-    for (let i = 0; i < cantidadinputs.length; i++) {
-      let input = document.createElement("input");
-      input.type = "text";
-      input.classList.add("letra");
-      input.pattern = "[A-Za-z]";
-      input.maxLength = 1;
-      inputs.appendChild(input);
-    }
+  for (let i = 0; i < cantidadinputs.length; i++) {
+    let input = document.createElement("input");
+    input.type = "text";
+    input.classList.add("letra");
+    input.pattern = "[A-Za-z]";
+    input.maxLength = 1;
+    inputs.appendChild(input);
   }
-  crearInputs();
 }
 
 function obtenerRespuestas() {
   let numerosInputs = document.querySelectorAll('input[type="text"]');
   // de aca obtiene los input y index el forEach
   numerosInputs[0].focus();
+
   let evento = numerosInputs[numerosInputs.length - 1];
+
   numerosInputs.forEach((input, index) => {
     //  aca hay misma cantidad de input y index  console.log(input)
     input.addEventListener("keyup", function (event) {
-      if (event.key === "Backspace") {
+      if (input.value.length === 0 && index > 0) {
         numerosInputs[index - 1].focus();
       }
-      if (event.key.length === 1 && index < numerosInputs.length - 1) {
+      if (input.value.length === 1 && index < numerosInputs.length - 1) {
         numerosInputs[index + 1].focus();
       }
     });
   });
-  evento.addEventListener("keyup", function () {
+
+  evento.addEventListener("input", function () {
     let respuestaDeUsuario = [];
     let respuestaCorrecta = [];
 
@@ -73,13 +117,14 @@ function obtenerRespuestas() {
         respuestaDeUsuario.push(respuesta);
       }
     }
-    palabraUsuario();
     function palabraCorrecta() {
       for (let i = 0; i < palabrasOrdenadas.length; i++) {
         const palabra = palabrasOrdenadas[i];
         respuestaCorrecta.push(palabra);
       }
     }
+
+    palabraUsuario();
     palabraCorrecta();
 
     function compararPalabra() {
@@ -92,7 +137,7 @@ function obtenerRespuestas() {
         let obtentenerError = palabrasInconrrectas[0];
         let separador = obtentenerError.split("");
 
-        pistas.innerText = `Mistakes: ${separador}`;
+        pistas.innerText = `Palabra anterior: ${separador}`;
 
         lugares.forEach((input) => {
           input.value = "";
@@ -104,65 +149,16 @@ function obtenerRespuestas() {
           }
         });
         contador++;
-        posibilidades.innerText = `Tries(${contador}/5):`;
+        posibilidades.innerText = `Vidas(${contador}/5):`;
         lugares[0].focus();
-        Swal.fire({
-          icon: "error",
-          title: `La palabra es incorrecta`,
-          text: "Vuelve a intentarlo!",
-          background: "#1b1d29",
-          color: "#F2F5F9",
-          confirmButtonColor: "#c951e7",
-        });
+        gameover();
       } else {
-        Swal.fire({
-          icon: "success",
-          title: "RESPUESTA CORRECTA! 🎉",
-          text: "Felicidades haz ganado 🏆",
-          background: "#1b1d29",
-          color: "#F2F5F9",
-          confirmButtonColor: "#c951e7",
-        });
+        winner();
       }
       if (contador === 5) {
-        Swal.fire({
-          icon: "error",
-          title: `GAME OVER`,
-          text: "Vuelve a intentarlo!",
-          background: "#1b1d29",
-          color: "#F2F5F9",
-          confirmButtonColor: "#c951e7",
-        });
-        setTimeout(() => {
-          location.reload(true);
-          as;
-        }, 4000);
+        youLost();
       }
     }
     compararPalabra();
-  });
-}
-
-function eventosMovil() {
-  let numerosInputs = document.querySelectorAll('input[type="text"]');
-
-  // Enfoca el primer input inicialmente
-  numerosInputs[0].focus();
-
-  numerosInputs.forEach((input, index) => {
-    // Escucha los eventos táctiles y de teclado
-    input.addEventListener("input", function (event) {
-      // Si se ingresa un carácter y no es el último input, mueve el foco al siguiente
-      if (input.value.length === 1 && index < numerosInputs.length - 1) {
-        numerosInputs[index + 1].focus();
-      }
-    });
-
-    input.addEventListener("touchend", function (event) {
-      // Si el input está vacío y no es el primero, mueve el foco al anterior
-      if (input.value.length === 0 && index > 0) {
-        numerosInputs[index - 1].focus();
-      }
-    });
   });
 }

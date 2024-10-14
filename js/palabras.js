@@ -22,5 +22,6 @@ export const palabrasDesordenadas = [
     desordenado8: "busne",
     desordenado9: "javeis",
     desordenado10: "gcaasr",
+    desordenado1: "lo",
   },
 ];
