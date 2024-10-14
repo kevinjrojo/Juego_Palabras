@@ -31,7 +31,6 @@ function winner() {
 
   setTimeout(() => {
     location.reload(true);
-    as;
   }, 4000);
 }
 function youLost() {
@@ -42,7 +41,6 @@ function youLost() {
 
   setTimeout(() => {
     location.reload(true);
-    as;
   }, 4000);
 }
 

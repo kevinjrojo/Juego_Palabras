@@ -119,13 +119,18 @@ body {
     margin-bottom: 0px;
   }
   .buttons {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
   }
   .letra {
     margin: 3px;
   }
   .btn {
-    margin-left: 25px;
-    margin-right: 25px;
+  }
+  .msj {
+    text-align: center;
+    width: 200%;
+    font-size: 15px;
   }
 }
