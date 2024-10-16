@@ -5,9 +5,10 @@ let inputs = document.querySelector(".respuestas");
 let pistas = document.querySelector(".pistas");
 let reiniciar = document.querySelector(".reset");
 let random = document.querySelector(".random");
+let mensajes = document.querySelector(".reglas");
 let vidas = document.querySelectorAll(".vidas");
 let posibilidades = document.querySelector(".cantidad");
-let avisos = document.querySelector(".buttons");
+
 let contador = 0;
 let cantidadinputs;
 
@@ -21,13 +22,21 @@ function gameover() {
   let errorPalabra = document.createElement("p");
   errorPalabra.innerText = "Palabra Incorrecta ❌,Vuelve a intentarlo!";
   errorPalabra.classList.add("msj");
-  avisos.appendChild(errorPalabra);
+  inputs.appendChild(errorPalabra);
+  setTimeout(() => {
+    errorPalabra.innerText = null;
+  }, 3000);
 }
 function winner() {
-  let ganador = document.createElement("p");
-  ganador.innerText = "🎉Haz Ganado ¡Felicidades!🎉 ";
-  ganador.classList.add("msj");
-  avisos.appendChild(ganador);
+  Swal.fire({
+    title: "🎉Haz Ganado ¡Felicidades!🎉",
+    background: "#1b1d29",
+    width: 500,
+    backdrop: "#c951e78a",
+    color: "white",
+    showConfirmButton: false,
+    icon: "success",
+  });
 
   setTimeout(() => {
     location.reload(true);
@@ -37,7 +46,7 @@ function youLost() {
   let perder = document.createElement("p");
   perder.innerText = "☠️Haz perdido☠️";
   perder.classList.add("msj");
-  avisos.appendChild(perder);
+  mensajes.appendChild(perder);
 
   setTimeout(() => {
     location.reload(true);
@@ -111,7 +120,7 @@ function obtenerRespuestas() {
     function palabraUsuario() {
       for (let i = 0; i < numerosInputs.length; i++) {
         const element = numerosInputs[i];
-        let respuesta = element.value;
+        let respuesta = element.value.toLowerCase();
         respuestaDeUsuario.push(respuesta);
       }
     }
