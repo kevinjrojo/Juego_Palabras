@@ -5,12 +5,11 @@ let inputs = document.querySelector(".respuestas");
 let pistas = document.querySelector(".pistas");
 let reiniciar = document.querySelector(".reset");
 let random = document.querySelector(".random");
-let mensajes = document.querySelector(".reglas");
 let vidas = document.querySelectorAll(".vidas");
 let posibilidades = document.querySelector(".cantidad");
-
 let contador = 0;
 let cantidadinputs;
+let respuesta;
 
 reiniciarTodo();
 palabraRandom();
@@ -30,6 +29,7 @@ function gameover() {
 function winner() {
   Swal.fire({
     title: "🎉Haz Ganado ¡Felicidades!🎉",
+    text: `El juego se reiniciara en 4seg...`,
     background: "#1b1d29",
     width: 500,
     backdrop: "#c951e78a",
@@ -37,16 +37,15 @@ function winner() {
     showConfirmButton: false,
     icon: "success",
   });
-
   setTimeout(() => {
     location.reload(true);
   }, 4000);
 }
 function youLost() {
   let perder = document.createElement("p");
-  perder.innerText = "☠️Haz perdido☠️";
+  perder.innerText = "☠️Haz perdido☠️ El juego se reiniciara...";
   perder.classList.add("msj");
-  mensajes.appendChild(perder);
+  inputs.appendChild(perder);
 
   setTimeout(() => {
     location.reload(true);
@@ -61,14 +60,12 @@ function reiniciarTodo() {
 
 function palabraRandom() {
   random.addEventListener("click", () => {
-    palabras.innerHTML = "";
-
-    palabrasDesordenadas.forEach((element) => {
-      let clave = Object.values(element);
-      let indiceAleatorio = Math.floor(Math.random() * clave.length);
-      let claveAleatorio = clave[indiceAleatorio];
-      palabras.innerText = claveAleatorio;
-    });
+    contador = 0;
+    posibilidades.innerText = "Vidas(0/5)";
+    for (let indice = 0; indice < vidas.length; indice++) {
+      const element = vidas[indice];
+      element.style.color = "#97a3b6";
+    }
   });
 }
 
@@ -120,7 +117,7 @@ function obtenerRespuestas() {
     function palabraUsuario() {
       for (let i = 0; i < numerosInputs.length; i++) {
         const element = numerosInputs[i];
-        let respuesta = element.value.toLowerCase();
+        respuesta = element.value.toLowerCase();
         respuestaDeUsuario.push(respuesta);
       }
     }
@@ -143,9 +140,7 @@ function obtenerRespuestas() {
         palabrasInconrrectas.push(result);
         let obtentenerError = palabrasInconrrectas[0];
         let separador = obtentenerError.split("");
-
         pistas.innerText = `Palabra anterior: ${separador}`;
-
         lugares.forEach((input) => {
           input.value = "";
         });
