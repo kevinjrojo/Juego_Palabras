@@ -1,15 +1,15 @@
 import { palabrasOrdenadas, palabrasDesordenadas } from "./palabras.js";
 
-let palabras = document.querySelector(".palabra");
-let inputs = document.querySelector(".respuestas");
-let pistas = document.querySelector(".pistas");
-let reiniciar = document.querySelector(".reset");
+let jumbledWord = document.querySelector(".jumbled-word");
+let userResponse = document.querySelector(".user-response");
+let previousWord = document.querySelector(".previous-word");
+let resetGame = document.querySelector(".reset");
 let random = document.querySelector(".random");
-let vidas = document.querySelectorAll(".vidas");
-let posibilidades = document.querySelector(".cantidad");
-let contador = 0;
-let cantidadinputs;
-let respuesta;
+let life = document.querySelectorAll(".life");
+let lifeNumber = document.querySelector(".life-number");
+let losses = 0;
+let numberInputs;
+let response;
 
 reiniciarTodo();
 palabraRandom();
@@ -21,7 +21,7 @@ function gameover() {
   let errorPalabra = document.createElement("p");
   errorPalabra.innerText = "Palabra Incorrecta ❌,Vuelve a intentarlo!";
   errorPalabra.classList.add("msj");
-  inputs.appendChild(errorPalabra);
+  userResponse.appendChild(errorPalabra);
   setTimeout(() => {
     errorPalabra.innerText = null;
   }, 3000);
@@ -29,7 +29,7 @@ function gameover() {
 function winner() {
   Swal.fire({
     title: "🎉Haz Ganado ¡Felicidades!🎉",
-    text: `El juego se reiniciara en 4seg...`,
+    text: `El juego se reiniciara...`,
     background: "#1b1d29",
     width: 500,
     backdrop: "#c951e78a",
@@ -45,7 +45,7 @@ function youLost() {
   let perder = document.createElement("p");
   perder.innerText = "☠️Haz perdido☠️ El juego se reiniciara...";
   perder.classList.add("msj");
-  inputs.appendChild(perder);
+  userResponse.appendChild(perder);
 
   setTimeout(() => {
     location.reload(true);
@@ -53,17 +53,18 @@ function youLost() {
 }
 
 function reiniciarTodo() {
-  reiniciar.addEventListener("click", () => {
+  resetGame.addEventListener("click", () => {
     location.reload(true);
   });
 }
 
 function palabraRandom() {
   random.addEventListener("click", () => {
-    contador = 0;
-    posibilidades.innerText = "Vidas(0/5)";
-    for (let indice = 0; indice < vidas.length; indice++) {
-      const element = vidas[indice];
+    losses = 0;
+    previousWord.innerText = "Palabra Anterior: ";
+    lifeNumber.innerText = "Vidas(0/5):";
+    for (let indice = 0; indice < life.length; indice++) {
+      const element = life[indice];
       element.style.color = "#97a3b6";
     }
   });
@@ -75,19 +76,19 @@ function obtenerPalabras() {
     let indiceAleatorio = Math.floor(Math.random() * clave.length);
 
     let claveAleatorio = clave[indiceAleatorio];
-    cantidadinputs = claveAleatorio;
+    numberInputs = claveAleatorio;
   });
 }
 
 function crearInputs() {
-  palabras.innerText = cantidadinputs;
-  for (let i = 0; i < cantidadinputs.length; i++) {
+  jumbledWord.innerText = numberInputs;
+  for (let i = 0; i < numberInputs.length; i++) {
     let input = document.createElement("input");
     input.type = "text";
     input.classList.add("letra");
     input.pattern = "[A-Za-z]";
     input.maxLength = 1;
-    inputs.appendChild(input);
+    userResponse.appendChild(input);
   }
 }
 
@@ -117,8 +118,8 @@ function obtenerRespuestas() {
     function palabraUsuario() {
       for (let i = 0; i < numerosInputs.length; i++) {
         const element = numerosInputs[i];
-        respuesta = element.value.toLowerCase();
-        respuestaDeUsuario.push(respuesta);
+        response = element.value.toLowerCase();
+        respuestaDeUsuario.push(response);
       }
     }
     function palabraCorrecta() {
@@ -132,7 +133,7 @@ function obtenerRespuestas() {
     palabraCorrecta();
 
     function compararPalabra() {
-      let lugares = inputs.querySelectorAll(".letra");
+      let lugares = userResponse.querySelectorAll(".letra");
       let result = respuestaDeUsuario.join("");
       let palabrasInconrrectas = [];
 
@@ -140,24 +141,24 @@ function obtenerRespuestas() {
         palabrasInconrrectas.push(result);
         let obtentenerError = palabrasInconrrectas[0];
         let separador = obtentenerError.split("");
-        pistas.innerText = `Palabra anterior: ${separador}`;
+        previousWord.innerText = `Palabra anterior: ${separador}`;
         lugares.forEach((input) => {
           input.value = "";
         });
 
-        vidas.forEach((element, indice) => {
-          if (indice === contador) {
+        life.forEach((element, indice) => {
+          if (indice === losses) {
             element.style.color = "#7429C6";
           }
         });
-        contador++;
-        posibilidades.innerText = `Vidas(${contador}/5):`;
+        losses++;
+        lifeNumber.innerText = `Vidas(${losses}/5):`;
         lugares[0].focus();
         gameover();
       } else {
         winner();
       }
-      if (contador === 5) {
+      if (losses === 5) {
         youLost();
       }
     }

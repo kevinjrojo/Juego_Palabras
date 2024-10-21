@@ -1,60 +1,72 @@
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 97vh;
-  background-image: url("../img/bg-guess-the-word.png");
+  background: rgb(209, 17, 237);
+  background: linear-gradient(
+    213deg,
+    rgba(209, 17, 237, 1) 0%,
+    rgba(160, 25, 216, 1) 67%,
+    rgba(109, 34, 195, 1) 100%
+  );
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 100vh;
+  margin: 0;
 }
-.container {
+.target-container {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: auto;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
-  width: 65vh;
+  width: 40%;
   background-color: #1b1d29;
+  height: 80%;
 }
-.palabra {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+.title {
+  color: rgb(209, 17, 237);
+}
+.jumbled-word {
   border-radius: 5px;
-  margin-bottom: 2%;
   letter-spacing: 2vh;
   background-color: #4a5567;
   color: #97a3b6;
-  font-size: 45px;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding: 5px;
+  font-size: 50px;
+  margin: 5%;
+  padding: 10px;
   box-shadow: 1px 5px #030616;
 }
-.reglas {
+.rules {
   display: flex;
   justify-content: space-evenly;
 }
-.oportunidades {
+.life-game {
   display: flex;
   width: 50%;
 }
-.cantidad {
+.life-number {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #97a3b6;
 }
-.vidas {
+.life {
   font-size: 28px;
   color: #97a3b6;
   margin-left: 2%;
-  margin-top: 6.7%;
+  margin-top: 3%;
 }
-.pistas {
+.previous-word {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #97a3b6;
 }
-.respuestas {
-  margin-top: 60px;
+.user-response {
+  margin-top: 10px;
   margin-bottom: 30px;
 }
+
 .letra {
   margin: 8px;
   text-align: center;
@@ -74,10 +86,7 @@ body {
   background-color: #c951e7;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 8px;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin: 10%;
   padding: 10px;
   color: #f2f5f9;
   box-shadow: 1px 5px #672171;
@@ -89,10 +98,7 @@ body {
   background-color: #c951e7;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 8px;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin: 10%;
   padding: 10px;
   color: #f2f5f9;
   box-shadow: 1px 5px #672171;
@@ -106,34 +112,47 @@ body {
 }
 
 @media (min-width: 300px) and (max-width: 900px) {
-  .container {
+  body {
+    background: rgb(209, 17, 237);
+    background: linear-gradient(
+      213deg,
+      rgba(209, 17, 237, 1) 0%,
+      rgba(160, 25, 216, 1) 67%,
+      rgba(109, 34, 195, 1) 100%
+    );
+  }
+  .target-container {
+    width: 87%;
     margin: auto;
-    width: 90%;
   }
   .palabra {
     font-size: 40px;
     margin-left: 5%;
     margin-right: 5%;
   }
-  .respuestas {
-    margin-top: 20px;
-    margin-bottom: 0px;
+  .vidas {
+    margin-left: 1px;
   }
+
   .buttons {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: center;
+  }
+  .random {
+    margin: 15px;
+  }
+  .reset {
+    margin: 15px;
   }
   .letra {
     width: 30px;
     height: 30px;
     margin: 2px;
   }
-  .btn {
-  }
+
   .msj {
     text-align: center;
-
     font-size: 15px;
   }
 }

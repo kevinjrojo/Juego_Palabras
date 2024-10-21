@@ -4,26 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/style.css" />
-    <title>Juego de palabras</title>
+    <link rel="icon" type="image/svg+xml" href="./img/buscando.png" />
+    <title>Word Scramblle</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
-    <div class="container">
-      <img src="./img/Word Scramblle.svg" alt=" title" class="logo" />
-      <p class="palabra"></p>
-      <div class="reglas">
-        <div class="oportunidades">
-        <p class="cantidad">Vidas(0/5) :
-          <p class="vidas">•</p>
-          <p class="vidas">•</p> 
-          <p class="vidas">•</p> 
-          <p class="vidas">•</p>
-          <p class="vidas">•</p>  
+    <div class="target-container">
+      <h1 class="title">Word Scramblle</h1>
+      <p class="jumbled-word"></p>
+      <div class="rules">
+        <div class="life-game">
+        <p class="life-number">Vidas(0/5):
+          <p class="life">•</p>
+          <p class="life">•</p> 
+          <p class="life">•</p> 
+          <p class="life">•</p>
+          <p class="life">•</p>  
         </p>
       </div>
-        <p class="pistas">Palabra Anterior:_____</p>
+        <p class="previous-word">Palabra anterior:</p>
       </div>
-      <div class="respuestas"></div>
+      <div class="user-response"></div>
       <div class="buttons">
         <button type="button" class="random">Reiniciar</button>
         <button type="button" class="reset">Aleatorio</button>
