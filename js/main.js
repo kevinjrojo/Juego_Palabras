@@ -61,7 +61,7 @@ function reiniciarTodo() {
 function palabraRandom() {
   random.addEventListener("click", () => {
     losses = 0;
-    previousWord.innerText = "Palabra Anterior: ";
+    previousWord.innerText = "Palabra anterior: ";
     lifeNumber.innerText = "Vidas(0/5):";
     for (let indice = 0; indice < life.length; indice++) {
       const element = life[indice];
